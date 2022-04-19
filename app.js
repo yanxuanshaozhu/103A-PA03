@@ -225,8 +225,6 @@ function time2str(time){
   return `${meetingType}: ${days.join(",")}: ${min2HourMin(start)}-${min2HourMin(end)} ${location}`
 }
 
-
-
 /* ************************
   Loading (or reloading) the data into a collection
    ************************ */
@@ -261,6 +259,29 @@ app.post('/courses/bySubject',
   async (req,res,next) => {
     const {subject} = req.body;
     const courses = await Course.find({subject:subject,independent_study:false}).sort({term:1,num:1,section:1})
+    
+    res.locals.courses = courses
+    res.locals.times2str = times2str
+    //res.json(courses)
+    res.render('courselist')
+  }
+)
+
+function isKey(key){
+  const c = {}
+  for (course of courses){
+    const name = course.name
+    if(name.includes(key)){
+      c.push(name)
+    }
+  }
+  return c
+}
+app.post('/courses/byKey',
+  // show list of courses that have the given keyword in their course name
+  async (req,res,next) => {
+    const {keyword} = req.body;
+    const courses = await isKey(courses, keyword)
     
     res.locals.courses = courses
     res.locals.times2str = times2str

@@ -33,8 +33,8 @@ const courses = require('./public/data/courses20-21.json')
 // *********************************************************** //
 
 const mongoose = require( 'mongoose' );
-const mongodb_URI = 'mongodb://localhost:27017/cs103a_todo'
-//const mongodb_URI = 'mongodb+srv://cs_sj:BrandeisSpr22@cluster0.kgugl.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
+//const mongodb_URI = 'mongodb://localhost:27017/cs103a_todo'
+const mongodb_URI = 'mongodb+srv://cs_sj:BrandeisSpr22@cluster0.kgugl.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
 
 mongoose.connect( mongodb_URI, { useNewUrlParser: true, useUnifiedTopology: true } );
 // fix deprecation warnings
@@ -239,8 +239,15 @@ app.get('/upsertDB',
     for (course of courses){
       const {subject,coursenum,section,term}=course;
       const num = getNum(coursenum);
+      const t = times;
       course.num=num
       course.suffix = coursenum.slice(num.length)
+      if( !t || t.length==0){
+        course.strTimes = ["not scheduled"]
+      }
+      else{
+        course.strTimes = t.map(x => time2str(x))
+      } 
       await Course.findOneAndUpdate({subject,coursenum,section,term},course,{upsert:true})
     }
     const num = await Course.find({}).count();

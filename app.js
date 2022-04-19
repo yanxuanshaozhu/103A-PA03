@@ -272,7 +272,7 @@ function isKey(key){
   for (course of courses){
     const name = course.name
     if(name.includes(key)){
-      c.push(name)
+      c.push(course)
     }
   }
   return c
@@ -280,8 +280,8 @@ function isKey(key){
 app.post('/courses/byKey',
   // show list of courses that have the given keyword in their course name
   async (req,res,next) => {
-    const {keyword} = req.body;
-    const courses = await isKey(courses, keyword)
+    const keyword = req.body;
+    const courses = isKey(courses, keyword)
     
     res.locals.courses = courses
     res.locals.times2str = times2str
@@ -289,7 +289,16 @@ app.post('/courses/byKey',
     res.render('courselist')
   }
 )
-
+app.get('/courses/byKey/:key',
+  // show a list of all courses taught by a given faculty
+  async (req,res,next) => {
+    const email = req.params.key;
+    const courses = isKey(courses, keyword)
+    //res.json(courses)
+    res.locals.courses = courses
+    res.render('courselist')
+  } 
+)
 app.get('/courses/show/:courseId',
   // show all info about a course given its courseid
   async (req,res,next) => {

@@ -20,6 +20,7 @@ var courseSchema = Schema( {
     coursenum: String,
     num: Number,
     suffix: String,
+    strTimes: [String],
     name: String,
     independent_study: Boolean,
     term: Number,

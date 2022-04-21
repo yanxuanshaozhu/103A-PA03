@@ -1,13 +1,10 @@
 
-<div class="d-flex flex-wrap text-center overflow-scroll">
+<div class="d-flex flex-wrap overflow-scroll">
     <% for (course of courses) {%>
         <div class="p-3 m-3 border border-primary bg-light">
-            
-            <br>
-            <%= course['subject'] %>
-            <%= course.coursenum %>
-            <%= course.name %>
-            <%= course.term %>
+            <p><span class="h2 text-center"><%= course['subject'] %><%= course.coursenum %></span></p>
+            <p><span class="fw-bold">Course name</span><span>: <%= course.name %></span></p>
+            <p><span class="fw-bold">Term</span><span>: <%= course.term %></span></p>
         </div>
     <% }%>
     </div>

@@ -1,7 +1,6 @@
 # CS103a Express App Demo
 
-This is a starter project which has a simple authentication module 
-and provides access to a mongoose database in the cloud.
+This is a course searcher and scheduler. It provides searching by subjects, instructor email and course name keywords. Users can sign up and log in to build their schedule and todo list. On introduction pages of the courses, users are able to add them to their schedule. Course data are stored in a MongoDB database.
 
 ## Installation
 Download the project from github and download nodejs and npm from https://nodejs.org

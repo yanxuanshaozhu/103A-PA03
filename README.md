@@ -23,3 +23,6 @@ and start the project with
 nodemon
 ```
 
+## Video Demo
+
+You can click this <a href="https://drive.google.com/file/d/1-6Ueg04K80dcr-8Sm3sR9CZZ6ueW6dq4/view?usp=sharing">link</a> to watch a little video demo on how to use this app.
